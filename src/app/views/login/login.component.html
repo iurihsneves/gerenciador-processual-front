@@ -1,0 +1,33 @@
+<div class="authentication">
+    <h2>Sistema de Controle Processual</h2>
+    <span>Insira seu login e senha</span>
+    <form #loginForm="ngForm" (ngSubmit)="loginUsuario()">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" placeholder="Insira seu email..." name="email" [(ngModel)]="usuario.email"
+            required pattern="^\w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$" #email="ngModel" [class.is-invalid]="email.invalid && email.touched">
+            <small class="text-danger" [class.d-none]="email.valid || email.untouched">Preenchimento de um email válido é obrigatório !</small>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" class="form-control" placeholder="Insira sua senha..." name="senha" [(ngModel)]="usuario.password"
+            required #senha="ngModel" [class.is-invalid]="senha.invalid && senha.touched">
+            <small class="text-danger" [class.d-none]="senha.valid || senha.untouched">Preenchimento da senha é obrigatório !</small>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="salvarUsuario">Lembrar usuário</label>
+        </div>
+        <div *ngIf="loginInvalido">
+            <span class="text-danger">{{msgUsuarioSenhaInvalidos}}</span>
+        </div>
+        
+
+        <button type="submit" class="btn btn-info">Entrar</button>
+    </form>
+    
+    <div class="float-right">
+        <small [routerLink]="['/cadastro-usuario']">Ainda não possui cadastro? Clique aqui !</small>
+    </div>
+    
+
+</div>

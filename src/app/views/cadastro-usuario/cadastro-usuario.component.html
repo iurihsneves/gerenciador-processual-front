@@ -1,0 +1,35 @@
+<div class="authentication">
+    <h2>Cadastro de novo usuário</h2>
+    <form #loginForm="ngForm" (ngSubmit)="cadastrarUsuario()">
+        <div class="form-group">
+            <label for="nomeCompleto">Nome completo:</label>
+            <input type="text" class="form-control" placeholder="Insira seu nome completo..." name="nomeCompleto" [(ngModel)]="usuario.nomeCompleto"
+            required #nomeCompleto="ngModel" [class.is-invalid]="nomeCompleto.invalid && nomeCompleto.touched">
+            <small class="text-danger" [class.d-none]="nomeCompleto.valid || nomeCompleto.untouched">Preenchimento do nome é obrigatório !</small>
+        </div>
+        <div class="form-group">
+            <label for="text">Email:</label>
+            <input type="email" class="form-control" placeholder="Insira seu email..." name="email" [(ngModel)]="usuario.email"
+            required pattern="^\w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$" #email="ngModel" [class.is-invalid]="email.invalid && email.touched">
+            <small class="text-danger" [class.d-none]="email.valid || email.untouched">Preenchimento de um email válido é obrigatório !</small>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" class="form-control" placeholder="Insira sua senha..." name="senha" [(ngModel)]="usuario.password"
+            required #senha="ngModel" [class.is-invalid]="senha.invalid && senha.touched">
+            <small class="text-danger" [class.d-none]="senha.valid || senha.untouched">Preenchimento da senha é obrigatório !</small>
+        </div>
+
+        <div *ngIf="erroAoSalvar">
+            <span class="text-danger">{{msgErro}}</span>
+        </div>
+
+        <button type="submit" class="btn btn-info">Cadastrar</button>
+    </form>
+    
+    <div class="float-right">
+        <small [routerLink]="['/']">Já possui cadastro? Clique aqui para retornar para a tela de login!</small>
+    </div>
+    
+
+</div>
