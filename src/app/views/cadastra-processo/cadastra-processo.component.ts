@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Processo } from 'src/app/modelo/processo';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Usuario } from 'src/app/modelo/usuario';
+import { UsuarioService } from 'src/app/service/usuario.service';
+import { ProcessoService } from 'src/app/service/processo.service';
+import { CaixaDialogoService } from 'src/app/caixa-dialogo/caixa-dialogo.service';
 
 @Component({
   selector: 'app-cadastra-processo',
@@ -16,66 +19,48 @@ export class CadastraProcessoComponent implements OnInit {
   processoClone: Processo;
 
   usuarios: Usuario[] = new Array<Usuario>();
+  msgErro: string;
 
-  constructor() {
+  constructor(private caixaDialogoService: CaixaDialogoService,
+    private _usuarioService: UsuarioService,
+    private _processoService: ProcessoService) {
 
-    this.criaArrayProcessos();
-
-    this.carregarUsuarios();
+    this.processoSelecionado = new Processo();
     
-  }
+    this.carregarUsuarios();
 
-  carregarUsuarios(){
-    let usuario1: Usuario = new Usuario();
-    usuario1.id = 1;
-    usuario1.email = 'i@i';
-    usuario1.nomeCompleto = 'i n';
-
-    let usuario2: Usuario = new Usuario();
-    usuario2.id = 2;
-    usuario2.email = '2@2';
-    usuario2.nomeCompleto = '2 n';
-
-    let usuario3: Usuario = new Usuario();
-    usuario3.id = 3;
-    usuario3.email = '3@i';
-    usuario3.nomeCompleto = '3 n';
-
-    let usuario4: Usuario = new Usuario();
-    usuario4.id = 4;
-    usuario4.email = '4@i';
-    usuario4.nomeCompleto = '4 n';
-
-    this.usuarios.push(usuario1);
-    this.usuarios.push(usuario2);
-    this.usuarios.push(usuario3);
-    this.usuarios.push(usuario4);
-
-    this.usuarios.forEach(item => {
-      console.log(item);
-    })
-
-    let processo: Processo = new Processo();
-    processo.id = 1;
-    processo.idUsuario = 2;
-    processo.nmReu = 'iuri';
-    processo.nrProcesso = '3';
-
-    this.processos.push(processo);
+    this.carregarProcessos();  
 
   }
 
-  private criaArrayProcessos() {
+  carregarUsuarios() {
 
-    if(this.processos.length == 0) {
-      console.log('adicionando um processo vazio');
+    this._usuarioService.listarUsuarios().subscribe(data => {
+      console.log("Resposta recebida");
+      console.log(data);
+      this.usuarios = data;
+    },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  private carregarProcessos() {
+
       this.processos = new Array<Processo>()
 
-      let processo = new Processo();
-      
-      this.processos.push(processo);
+      this._processoService.listaProcessos().subscribe(data => {
+        console.log("Resposta recebida");
+        console.log(data);
+        this.processos = data;
+        this.processos.unshift(new Processo());
+      },
+        error => {
+          console.log(error);
+        }
+      )
 
-    }
 
   }
 
@@ -85,16 +70,39 @@ export class CadastraProcessoComponent implements OnInit {
   carregarDadosProcesso(processo: Processo) {
     this.processoSelecionado = processo;
     this.processoClone = Object.assign(new Processo(), processo);
-    console.log(processo);
-
   }
 
-  salvar(processo: Processo) {
+  salvarProcesso() {
+    this.caixaDialogoService.confirma('Confirmar!', 'Deseja realmente salvar o processo ?', true)
+      .then((confirmed) => {
+        console.log('processo', this.processoSelecionado);
+        this._processoService.salvarProcesso(this.processoSelecionado).subscribe(data => {
+          console.log('salvo com sucesso', data);
+          if(this.processoSelecionado.id != null){
 
+            this.caixaDialogoService.confirma('Salvo!', 'Processo salvo com sucesso!', false)
+              .then((confirmed) => this.carregarProcessos())
+              .catch(() => console.log('Faz nada, cancel desabilitado'));
+
+          } else {
+            console.log('foi um cadastro novo');
+            this.carregarProcessos();
+          }
+          
+        },
+          error => {
+            console.log(error);
+          }
+        )
+      })
+      .catch(() => console.log('Save cancelado'));
   }
 
-  cancelar(processo: Processo) {
-    processo = this.processoClone;
+  cancelar() {
+
+    this.processoSelecionado = new Processo();
+    this.processoSelecionado = this.processoClone;
+
   }
 
 }

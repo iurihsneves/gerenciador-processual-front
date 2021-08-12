@@ -8,6 +8,6 @@
       {{ mensagem }}
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-danger" (click)="decline()">{{ btnCancelaTexto }}</button>
+      <button type="button" class="btn btn-danger" (click)="decline()" *ngIf="showCancelar">{{ btnCancelaTexto }}</button>
       <button type="button" class="btn btn-primary" (click)="accept()">{{ btnOkTexto }}</button>
     </div>

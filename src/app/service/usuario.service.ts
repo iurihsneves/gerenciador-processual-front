@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../modelo/usuario';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Constantes } from '../constantes/constantes';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class UsuarioService {
 
   urlLogin = Constantes.endpoint + Constantes.port + Constantes.login;
 
-  
+  urlListaUsuarios = Constantes.endpoint + Constantes.port + Constantes.apiUsuario + Constantes.listar_usuarios;
 
   async login(usuario: any) {
 
@@ -42,9 +42,11 @@ export class UsuarioService {
     let url = Constantes.endpoint + Constantes.port +
     Constantes.apiUsuario + Constantes.cadastrar_usuario;
 
-    console.log(url);
-
     return this._http.post<any>(url, usuario);
+  }
+
+  public listarUsuarios(): Observable<any> {
+    return this._http.get(this.urlListaUsuarios);
   }
 
 }

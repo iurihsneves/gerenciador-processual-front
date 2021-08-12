@@ -25,8 +25,6 @@ export class CadastroUsuarioComponent implements OnInit {
 
   cadastrarUsuario(){
     this._service.cadastrarUsuario(this.usuario).subscribe(data => {
-      console.log("Resposta recebida");
-      console.log(data);
       this._router.navigate(['/']);
     },
     error => {

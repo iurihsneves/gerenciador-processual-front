@@ -8,6 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CaixaDialogoComponent implements OnInit {
 
+  @Input() showCancelar: boolean;
   @Input() titulo: string;
   @Input() mensagem: string;
   @Input() btnOkTexto: string;

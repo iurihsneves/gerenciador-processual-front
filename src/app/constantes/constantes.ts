@@ -6,14 +6,15 @@ export class Constantes {
 
     //APIs
     static apiLogin = "/login";
-    static apiProcessos = "/api/processos";
-    static apiUsuario = "/api/usuario";
+    static apiProcessos = "/processos";
+    static apiUsuario = "/usuario";
 
     //METODOS
     static login = "/login";
     static cadastrar_usuario = "/cadastrar-usuario";
-
-
+    static listar_usuarios = "/listar-usuarios";
+    static processo = "/processo";
+    static lista_processos = "/lista-processos";
 
     //MENSAGENS
     static usuario_senha_invalidos = "O usuário ou a senha digitados são inválidos.";

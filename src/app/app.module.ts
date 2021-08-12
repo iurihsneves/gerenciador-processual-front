@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './../app/guard/token.interceptor';
+import { JwtInterceptor } from './guard/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,11 @@ import { TokenInterceptor } from './../app/guard/token.interceptor';
               {
                 provide: HTTP_INTERCEPTORS,
                 useClass: TokenInterceptor,
+                multi: true
+              },
+              {
+                provide: HTTP_INTERCEPTORS,
+                useClass: JwtInterceptor,
                 multi: true
               }],
   bootstrap: [AppComponent]

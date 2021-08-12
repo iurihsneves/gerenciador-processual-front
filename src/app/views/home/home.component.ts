@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   efetuarLogout() {
-    this.caixaDialogoService.confirma('Confirmar logout', 'Deseja realmente sair do sistema ?')
+    this.caixaDialogoService.confirma('Confirmar logout', 'Deseja realmente sair do sistema ?', true)
     .then((confirmed) => this.excluirToken(confirmed))
     .catch(() => console.log('Logout cancelado'));
   }
@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
     } else {
       console.log('Recusou a saída do sistema.');
     }
-    
   }
 
   cadastrarProcesso() {
