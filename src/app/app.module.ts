@@ -10,6 +10,18 @@ import { CadastroUsuarioComponent } from './views/cadastro-usuario/cadastro-usua
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthenticationComponent } from './views/authentication/authentication.component';
+import { MatButtonModule } from '@angular/material/button';
+import { CaixaDialogoComponent } from './caixa-dialogo/caixa-dialogo.component';
+import { CaixaDialogoService } from './caixa-dialogo/caixa-dialogo.service';
+import { CadastraProcessoComponent } from './views/cadastra-processo/cadastra-processo.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './../app/guard/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,16 +29,30 @@ import { AuthenticationComponent } from './views/authentication/authentication.c
     LoginComponent,
     HomeComponent,
     CadastroUsuarioComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    CaixaDialogoComponent,
+    CadastraProcessoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [CaixaDialogoService,
+              {
+                provide: HTTP_INTERCEPTORS,
+                useClass: TokenInterceptor,
+                multi: true
+              }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

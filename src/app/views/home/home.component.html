@@ -1,1 +1,15 @@
-<router-outlet></router-outlet>
+<div class="centerDiv">
+    <h2>Sistema de Controle Processual</h2>
+    <br>
+    <section>
+    <div class="example-button-row">
+
+        <button color="primary" (click)="cadastrarProcesso()" mat-raised-button>Cadastrar Processo</button>
+        <button color="primary" [routerLink]="['/cadastro-usuario']" mat-raised-button>Visualizar Processos</button>
+        <br>
+        <br>
+        <button (click)="efetuarLogout()" mat-raised-button>Efetuar Logout</button>
+
+    </div>
+</section>
+    

@@ -22,7 +22,6 @@ export class UsuarioService {
     return this._http.post(this.urlLogin, JSON.stringify(usuario)).subscribe(data => {
       console.log(JSON.parse(JSON.stringify(data)));
       if(data != null) {
-        console.log(JSON.parse(JSON.stringify(data)).Authorization);
         var token = JSON.parse(JSON.stringify(data)).Authorization;
         sessionStorage.setItem("token", token);
         this._router.navigate(['/home']);
@@ -34,6 +33,7 @@ export class UsuarioService {
     },
     error => {
       console.error("Erro ao efetuar login");
+      return false;
     }
     )};
 

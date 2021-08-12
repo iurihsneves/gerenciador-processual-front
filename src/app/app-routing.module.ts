@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AutenticacaoGuard } from './guard/autenticacao.guard';
 import { AuthenticationComponent } from './views/authentication/authentication.component';
 import { CadastroUsuarioComponent } from './views/cadastro-usuario/cadastro-usuario.component';
+import { CadastraProcessoComponent } from './views/cadastra-processo/cadastra-processo.component'
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 
@@ -16,9 +17,11 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children: [
-      { path: '', component: HomeComponent},
-    ],
+    canActivate: [AutenticacaoGuard]
+  },
+  {
+    path: 'cadastra-processo',
+    component: CadastraProcessoComponent,
     canActivate: [AutenticacaoGuard]
   },
   {
@@ -27,7 +30,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-      { path: 'cadastro-usuario', component: CadastroUsuarioComponent }
+      { path: 'cadastro-usuario', component: CadastroUsuarioComponent },
     ]
   },
   { path: '**', redirectTo: '' }

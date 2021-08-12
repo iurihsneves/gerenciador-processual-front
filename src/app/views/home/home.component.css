@@ -1,0 +1,16 @@
+.centerDiv {
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.float-right {
+    float: right;
+}
+
+
+.example-button-row {
+    display: table-cell;
+    width: 490px;
+  }
+  

@@ -30,8 +30,15 @@ export class LoginComponent implements OnInit {
   async loginUsuario() {
     try {
       const resultado = await this._service.login(this.usuario);
+      console.log(resultado)
+
+      if(resultado) {
+        this.msgUsuarioSenhaInvalidos = Constantes.usuario_senha_invalidos;
+        this.loginInvalido = true;
+      }
 
     } catch (error) {
+      
       console.error(error);
     }
   }
