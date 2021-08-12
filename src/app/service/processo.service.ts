@@ -22,11 +22,19 @@ export class ProcessoService {
     return this._http.get(urlListaProcessos);
   }
 
-  public salvarProcesso(processo: Processo): Observable<any>{
+  public salvarProcesso(processo: Processo): Observable<any> {
 
     let url = Constantes.endpoint + Constantes.port +
     Constantes.apiProcessos + Constantes.processo;
 
     return this._http.post<any>(url, processo);
+  }
+
+  public excluirProcesso(processo: Processo): Observable<any> {
+    
+    let url = Constantes.endpoint + Constantes.port +
+    Constantes.apiProcessos + Constantes.processo + '/' + processo.id;
+
+    return this._http.delete<any>(url);
   }
 }

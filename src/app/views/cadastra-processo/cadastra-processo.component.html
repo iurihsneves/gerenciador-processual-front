@@ -18,7 +18,7 @@
   
       <mat-form-field appearance="fill" style="width:400px !important">
         <mat-label>Número do processo</mat-label>
-        <input matInput [(ngModel)]="processoSelecionado.nrProcesso">
+        <input type="number" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" matInput [(ngModel)]="processoSelecionado.nrProcesso">
       </mat-form-field>
       <br>
       <mat-form-field appearance="fill" style="width:400px !important">
@@ -36,12 +36,16 @@
       </mat-form-field>
   <!-- #docregion action-bar -->
       <mat-action-row>
-        <button mat-button color="primary" (click)="salvarProcesso()">Salvar</button>
-        <button mat-button color="danger" (click)="cancelar()">Cancelar</button>
+        <button mat-button style="background-color: lightgreen" (click)="salvarProcesso()">Salvar</button>
+        <button mat-button style="background-color: yellow" (click)="cancelar()">Cancelar</button>
+        <button mat-button style="background-color: red" (click)="excluir(processo)">Excluir</button>
       </mat-action-row>
   <!-- #enddocregion action-bar -->
     </mat-expansion-panel>
-  
-  
   </mat-accordion>
+  <br><br>
+  <div class="joga-pra-direita">
+    <button style="background-color: #555555; color:white" (click)="efetuarLogout()" mat-raised-button>Efetuar Logout</button>
+  </div>
+  
 </div>

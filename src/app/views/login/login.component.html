@@ -14,13 +14,11 @@
             required #senha="ngModel" [class.is-invalid]="senha.invalid && senha.touched">
             <small class="text-danger" [class.d-none]="senha.valid || senha.untouched">Preenchimento da senha é obrigatório !</small>
         </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="salvarUsuario">Lembrar usuário</label>
-        </div>
+        <br>
         <div *ngIf="loginInvalido">
             <span class="text-danger">{{msgUsuarioSenhaInvalidos}}</span>
         </div>
-        
+        <br>
 
         <button type="submit" class="btn btn-info">Entrar</button>
     </form>
