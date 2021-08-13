@@ -75,7 +75,6 @@ export class CadastraProcessoComponent implements OnInit {
   private carregarProcessos() {
 
     let processoNovo = new Processo;
-    processoNovo.usuario = new Usuario;
     this.processos = new Array<Processo>()
 
     this._processoService.listaProcessos().subscribe(data => {

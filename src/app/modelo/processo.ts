@@ -4,5 +4,5 @@ export class Processo {
     id: number;
     nrProcesso: String;
     idUsuario: number;
-    usuario: Usuario;
+    obsProcesso: String;
 }

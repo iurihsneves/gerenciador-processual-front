@@ -26,6 +26,11 @@
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill" style="width:90%">
+            <mat-label>Observações do processo</mat-label>
+            <input type="text" matInput [(ngModel)]="processoSelecionado.obsProcesso">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" style="width:90%">
             <mat-label>Usuário Responsável
             </mat-label>
             <mat-select [(ngModel)]="processoSelecionado.idUsuario">
