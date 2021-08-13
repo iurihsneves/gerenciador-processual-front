@@ -8,6 +8,7 @@ export class Constantes {
     static apiLogin = "/login";
     static apiProcessos = "/processos";
     static apiUsuario = "/usuario";
+    static apiReu = "/reu";
 
     //METODOS
     static login = "/login";
@@ -15,6 +16,9 @@ export class Constantes {
     static listar_usuarios = "/listar-usuarios";
     static processo = "/processo";
     static lista_processos = "/lista-processos";
+    static reu = "/reu";
+    static lista_reu = "/listar-reu";
+    static excluir_reu = "/excluir-reu"
 
     //MENSAGENS
     static usuario_senha_invalidos = "O usuário ou a senha digitados são inválidos.";

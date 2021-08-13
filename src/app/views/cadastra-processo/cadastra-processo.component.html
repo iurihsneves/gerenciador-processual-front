@@ -15,37 +15,57 @@
           <b style="padding-right:1em">Número do processo: </b> {{ processo.nrProcesso }}
         </mat-panel-title>
       </mat-expansion-panel-header>
-  
-      <mat-form-field appearance="fill" style="width:400px !important">
-        <mat-label>Número do processo</mat-label>
-        <input type="number" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" matInput [(ngModel)]="processoSelecionado.nrProcesso">
-      </mat-form-field>
-      <br>
-      <mat-form-field appearance="fill" style="width:400px !important">
-        <mat-label>Nome do réu</mat-label>
-        <input matInput [(ngModel)]="processoSelecionado.nmReu">
-      </mat-form-field>
-      <br>
-      <mat-form-field appearance="fill" style="width:400px !important">
-        <mat-label>Usuário Responsável
-        </mat-label>
-        <mat-select [(ngModel)]="processoSelecionado.idUsuario">
-          <mat-option>Selecione</mat-option>
-          <mat-option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.nomeCompleto }} - {{ usuario.email }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-  <!-- #docregion action-bar -->
+
+      <div class="float-container">
+        <div class="float-child">
+          <mat-form-field appearance="fill" style="width:90%">
+            <mat-label>Número do processo</mat-label>
+            <input [disabled]="!!processo.id" type="number" onkeydown="if(event.key==='.'){event.preventDefault();}"
+              oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" matInput
+              [(ngModel)]="processoSelecionado.nrProcesso">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" style="width:90%">
+            <mat-label>Usuário Responsável
+            </mat-label>
+            <mat-select [(ngModel)]="processoSelecionado.idUsuario">
+              <mat-option>Selecione</mat-option>
+              <mat-option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.nomeCompleto }} - {{
+                usuario.email }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="float-child">
+          <mat-card  style="border: 1px solid #000" *ngIf="processo.id">
+            Novo Réu
+            <div>
+              <input id="main_search_input" [(ngModel)]="reuNovo.nomeCompleto" type="text" placeholder="Nome Completo" style="width: 80%"/>
+              <button mat-button style="background-color: lightgreen; margin-left: 5px" (click)="salvarNovoReu()" >Cadastrar</button>
+          </div>
+          </mat-card>
+          <mat-card  style="border: 1px solid #000" *ngFor="let reu of reus">
+            <div>
+              <input id="main_search_input" [(ngModel)]="reu.nomeCompleto" type="text" placeholder="Nome Completo" style="width: 70%"/>
+              <button mat-button style="background-color: lightgreen; margin-left: 5px" (click)="salvarReu(reu)" >Salvar</button>
+              <button mat-button style="background-color: lightgreen; margin-left: 5px" (click)="excluirReu(reu)" >Excluir</button>
+          </div>
+          </mat-card>
+          
+        </div>
+      </div>
+      <!-- #docregion action-bar -->
       <mat-action-row>
-        <button mat-button style="background-color: lightgreen" (click)="salvarProcesso()">Salvar</button>
-        <button mat-button style="background-color: yellow" (click)="cancelar()">Cancelar</button>
-        <button mat-button style="background-color: red" (click)="excluir(processo)">Excluir</button>
+        <button mat-button style="background-color: lightgreen" (click)="salvarProcesso()">Salvar Processo</button>
+        <button mat-button style="background-color: yellow" (click)="cancelar()">Cancelar Alteração de Responsável</button>
+        <button mat-button style="background-color: red" (click)="excluir(processo)">Excluir Processo</button>
       </mat-action-row>
-  <!-- #enddocregion action-bar -->
+      <!-- #enddocregion action-bar -->
     </mat-expansion-panel>
   </mat-accordion>
   <br><br>
   <div class="joga-pra-direita">
-    <button style="background-color: #555555; color:white" (click)="efetuarLogout()" mat-raised-button>Efetuar Logout</button>
+    <button style="background-color: #555555; color:white" (click)="efetuarLogout()" mat-raised-button>Efetuar
+      Logout</button>
   </div>
-  
+
 </div>

@@ -1,9 +1,37 @@
 .authentication {
-    width: 70%;
-    margin: 0 auto;
-    margin-top: 100px;
-  }
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
 
-  .joga-pra-direita {
-    float: right;
-  }
+.joga-pra-direita {
+  float: right;
+}
+
+.float-container {
+  border: 3px solid #fff;
+  padding: 20px;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 25px;
+}
+
+.div-com-borda {
+  border: 1px solid gray;
+}
+
+.wrapper {
+  background-color: skyblue;
+}
+.filterButtonsDiv {
+  display:grid;
+  grid-gap: 2px;
+  grid-template-columns: 2fr 5fr;
+  grid-template-rows: 22px;
+}
+.filterButtons-wrapper {
+  text-align: right;
+}
